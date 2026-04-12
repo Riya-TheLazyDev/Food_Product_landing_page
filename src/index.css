@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@import "@fontsource/inter";
+@import "@fontsource/playfair-display";
+
+@theme {
+  --font-sans: "Inter", "sans-serif";
+  --font-serif: "Playfair Display", "serif";
+  
+  --color-brand-green: #2F7D5B;
+  --color-brand-greenHover: #27694C;
+  --color-brand-greenSoft: #6FAF8F;
+
+  --color-background-main: #F5F1EA;
+  --color-background-beige: #E9E1D6;
+  --color-background-muted: #EFE8DE;
+
+  --color-text-primary: #2E2A26;
+  --color-text-secondary: #6E665E;
+  --color-text-muted: #9A9188;
+
+  --color-accent-peach: #EAD6C4;
+  --color-accent-yellow: #E8DFAF;
+  --color-accent-botanical: #CFE3D6;
+
+  --color-border: #DDD6CC;
+
+  --shadow-soft: 0 4px 20px rgba(0,0,0,0.05);
+  --shadow-card: 0 6px 24px rgba(0,0,0,0.08);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --background: 40 33% 94%;
+    --foreground: 30 9% 17%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 30 9% 17%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 9% 17%;
+    
+    --primary: 154 45% 34%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 35 32% 88%;
+    --secondary-foreground: 30 9% 17%;
+    
+    --muted: 35 32% 90%;
+    --muted-foreground: 30 6% 50%;
+    
+    --accent: 35 32% 88%;
+    --accent-foreground: 30 9% 17%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 35 24% 83%;
+    --input: 35 24% 83%;
+    --ring: 154 45% 34%;
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background-main text-text-primary;
+  }
+}
+
