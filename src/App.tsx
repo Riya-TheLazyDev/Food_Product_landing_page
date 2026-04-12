@@ -3,6 +3,7 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import Home from "@/pages/Home";
 import WineClub from "@/pages/WineClub";
+import Shop from "@/pages/Shop";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/wine-club" element={<WineClub />} />
+            <Route path="/shop" element={<Shop />} />
           </Routes>
         </main>
         <Footer />
