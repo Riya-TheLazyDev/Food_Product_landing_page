@@ -2,6 +2,7 @@ import type { Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
+import { motion } from "framer-motion";
 
 interface ProductSectionProps {
   title: string;
@@ -16,7 +17,10 @@ export function ProductSection({ title, products }: ProductSectionProps) {
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo = direction === "left" ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      const scrollTo =
+        direction === "left"
+          ? scrollLeft - clientWidth
+          : scrollLeft + clientWidth;
       scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
     }
   };
@@ -28,13 +32,13 @@ export function ProductSection({ title, products }: ProductSectionProps) {
           {title}
         </h2>
         <div className="flex items-center gap-2">
-          <button 
+          <button
             onClick={() => scroll("left")}
             className="p-2 rounded-full border border-brand-green/10 hover:bg-white hover:shadow-md transition-all active:scale-95"
           >
             <ChevronLeft className="w-5 h-5 text-brand-green" />
           </button>
-          <button 
+          <button
             onClick={() => scroll("right")}
             className="p-2 rounded-full border border-brand-green/10 hover:bg-white hover:shadow-md transition-all active:scale-95"
           >
@@ -43,17 +47,36 @@ export function ProductSection({ title, products }: ProductSectionProps) {
         </div>
       </div>
 
-      <div 
+      <motion.div
         ref={scrollRef}
         className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.08,
+            },
+          },
+        }}
       >
         {products.map((product) => (
-          <div key={product.id} className="min-w-[280px] md:min-w-[320px] lg:min-w-[350px] snap-start">
+          <motion.div
+            key={product.id}
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              show: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="min-w-[280px] md:min-w-[320px] lg:min-w-[350px] snap-start"
+          >
             <ProductCard product={product} />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
