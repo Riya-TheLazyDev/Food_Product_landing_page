@@ -25,20 +25,42 @@ const occasions = [
 
 export function OccasionSection() {
   return (
-    <div className="py-20 px-6 md:px-12 lg:px-20 bg-background-main/50">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="py-20 px-6 md:px-12 lg:px-20 bg-background-main/50"
+    >
       <div className="flex flex-col mb-12">
-        <span className="text-xs uppercase tracking-[0.2em] text-brand-green/60 mb-2">
+        <motion.span 
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-xs uppercase tracking-[0.2em] text-brand-green/60 mb-2"
+        >
           Inspirations
-        </span>
-        <h2 className="font-serif text-3xl md:text-5xl text-text-primary">
+        </motion.span>
+        <motion.h2 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="font-serif text-3xl md:text-5xl text-text-primary"
+        >
           A sip for every occasion
-        </h2>
+        </motion.h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {occasions.map((item, index) => (
           <motion.div
             key={index}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
             whileHover={{ scale: 0.98 }}
             className="group relative h-[450px] overflow-hidden rounded-3xl cursor-pointer"
           >
@@ -56,6 +78,6 @@ export function OccasionSection() {
           </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

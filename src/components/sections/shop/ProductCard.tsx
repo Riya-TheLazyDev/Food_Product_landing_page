@@ -15,7 +15,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <motion.div
       whileHover={{ y: -6 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       className="group border rounded-xl p-4 shadow-soft hover:shadow-2xl transition-all duration-300 bg-white"
     >
       {/* Image Section */}

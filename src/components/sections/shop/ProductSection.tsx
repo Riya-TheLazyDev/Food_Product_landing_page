@@ -2,7 +2,7 @@ import type { Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ProductSectionProps {
   title: string;
@@ -26,7 +26,13 @@ export function ProductSection({ title, products }: ProductSectionProps) {
   };
 
   return (
-    <div className="py-12 px-6 md:px-12 lg:px-20 border-t border-brand-green/5">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="py-12 px-6 md:px-12 lg:px-20 border-t border-brand-green/5"
+    >
       <div className="flex items-center justify-between mb-8">
         <h2 className="font-serif text-3xl md:text-4xl text-text-primary tracking-tight">
           {title}
@@ -53,7 +59,7 @@ export function ProductSection({ title, products }: ProductSectionProps) {
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-100px" }}
         variants={{
           hidden: {},
           show: {
@@ -63,20 +69,30 @@ export function ProductSection({ title, products }: ProductSectionProps) {
           },
         }}
       >
-        {products.map((product) => (
-          <motion.div
-            key={product.id}
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              show: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="min-w-[280px] md:min-w-[320px] lg:min-w-[350px] snap-start"
-          >
-            <ProductCard product={product} />
-          </motion.div>
-        ))}
+        <AnimatePresence mode="popLayout">
+          {products.map((product) => (
+            <motion.div
+              key={product.id}
+              layout
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                show: { opacity: 1, y: 0 },
+              }}
+              transition={{ 
+                duration: 0.5, 
+                ease: "easeOut",
+                layout: { duration: 0.3 }
+              }}
+              className="min-w-[280px] md:min-w-[320px] lg:min-w-[350px] snap-start"
+            >
+              <ProductCard product={product} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
