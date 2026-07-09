@@ -90,5 +90,107 @@
   body {
     @apply bg-background-main text-text-primary;
   }
+  
+  /* Desktop Custom Cursor Hide */
+  @media (min-width: 1024px) {
+    body.custom-cursor-active,
+    body.custom-cursor-active * {
+      cursor: none !important;
+    }
+  }
+
+  /* Custom Smooth Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-background-main);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-text-muted);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brand-green);
+  }
 }
+
+/* Premium Animations & Effects */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  content: "";
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Text Mask Reveal Container */
+.text-mask-container {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.text-mask-child {
+  display: block;
+}
+
+/* Diagonal Shine Sweep Effect */
+.shine-sweep-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-sweep-container::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 30%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.shine-sweep-container:hover::after {
+  transform: translate(300%, 0) rotate(25deg);
+}
+
+/* Magnetic Area Hover Target */
+.magnetic-target {
+  position: relative;
+}
+
+/* Radial Gradient Glow for hover elements */
+.hover-glow {
+  position: relative;
+}
+.hover-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, var(--color-accent-peach), var(--color-brand-greenSoft), var(--color-accent-yellow));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.5s ease;
+}
+.hover-glow:hover::before {
+  opacity: 0.6;
+}
+
 
